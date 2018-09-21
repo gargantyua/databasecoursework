@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/webjars/materializecss/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+    <nav class="nav-extended">
+        <div class="nav-wrapper container">
+            <a class="brand-logo"><i class="material-icons">save</i>Database Course Work</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><h5>Бюро по трудоустройству</h5></li>
+            </ul>
+        </div>
+        <div class="nav-content">
+            <ul class="tabs tabs-transparent">
+                <li class="tab"><a class="active" href="#emploers">Работодатели</a></li>
+                <li class="tab"><a href="#applicators">Соискатели</a></li>
+                <li class="tab"><a href="#deals">Сделки</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="emploers" class="col s12">
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Вид деятельности</th>
+                        <th>Адрес</th>
+                        <th>Телефон</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="e : ${emploers}">
+                        <td th:text="${e.id}"></td>
+                        <td th:text="${e.title}"></td>
+                        <td th:text="${e.activity}"></td>
+                        <td th:text="${e.address}"></td>
+                        <td th:text="${e.telephone}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="applicators" class="col s12">Test 2</div>
+    <div id="deals" class="col s12">Test 4</div>
+
+
+    <script src="/webjars/jquery/2.1.1/dist/jquery.min.js"></script>
+    <script src="/webjars/materializecss/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.tabs').tabs();
+        });
+    </script>
+</body>
+</html>
