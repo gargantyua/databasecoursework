@@ -19,7 +19,7 @@
         <div class="nav-content">
             <ul class="tabs tabs-transparent">
                 <li class="tab"><a class="active" href="#emploers">Работодатели</a></li>
-                <li class="tab"><a href="#applicators">Соискатели</a></li>
+                <li class="tab"><a href="#applicants">Соискатели</a></li>
                 <li class="tab"><a href="#deals">Сделки</a></li>
             </ul>
         </div>
@@ -49,8 +49,60 @@
             </table>
         </div>
     </div>
-    <div id="applicators" class="col s12">Test 2</div>
-    <div id="deals" class="col s12">Test 4</div>
+    <div id="applicants" class="col s12">
+        <div class="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Квалификация (лет)</th>
+                    <th>Вид деятельности</th>
+                    <th>Иная информация</th>
+                    <th>Желаемая ЗП</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${applicants}">
+                    <td th:text="${a.id}"></td>
+                    <td th:text="${a.surname}"></td>
+                    <td th:text="${a.name}"></td>
+                    <td th:text="${a.patronymic}"></td>
+                    <td class="center" th:text="${a.qualification}"></td>
+                    <td th:text="${a.activity}"></td>
+                    <td th:text="${a.otherInfo}"></td>
+                    <td class="center" th:text="${a.salary}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="deals" class="col s12">
+        <div class="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ФИО Соискателя</th>
+                    <th>Работодатель</th>
+                    <th>Должность</th>
+                    <th>Комисионные</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="d : ${deals}">
+                    <td th:text="${d.id}"></td>
+                    <td th:text="|${d.applicant.surname} ${d.applicant.name} ${d.applicant.patronymic}|"></td>
+                    <td th:text="${d.emploer.title}"></td>
+                    <td th:text="${d.position}"></td>
+                    <td th:text="${d.commission}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
     <script src="/webjars/jquery/2.1.1/dist/jquery.min.js"></script>
