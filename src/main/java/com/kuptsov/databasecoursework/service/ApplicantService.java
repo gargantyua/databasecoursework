@@ -1,10 +1,14 @@
 package com.kuptsov.databasecoursework.service;
 
 import com.kuptsov.databasecoursework.model.Applicant;
+import com.kuptsov.databasecoursework.model.Vacancy;
+import com.kuptsov.databasecoursework.service.common.CommonService;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface ApplicantService {
+public interface ApplicantService extends CommonService<Applicant> {
 
-    List<Applicant> getAllApplicants();
+    Optional<Applicant> removeSuitable(Vacancy vacancy);
+
+    Optional<Applicant> findSuitable(Vacancy applicant);
 }

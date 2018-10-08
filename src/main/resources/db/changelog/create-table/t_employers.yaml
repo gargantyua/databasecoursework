@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+        id: create-employers-table
+        author: gargantyua
+        changes:
+        - createTable:
+            columns:
+            - column:
+                name: employer_id
+                remarks: Уникальный идентификатор записи
+                type: bigint
+            - column:
+                name: title
+                remarks: Название компании
+                type: varchar(255)
+            - column:
+                name: activity
+                remarks: Вид деятельности
+                type: varchar(255)
+            - column:
+                name: address
+                remarks: Адрес работодателя
+                type: varchar(255)
+            - column:
+                name: telephone
+                remarks: Телефон работодателя
+                type: varchar(255)
+            - column:
+                name: deleted
+                remarks: Флаг удаления записи
+                type: boolean
+            tableName: t_employers

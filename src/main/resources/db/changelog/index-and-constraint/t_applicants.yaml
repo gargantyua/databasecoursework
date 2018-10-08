@@ -1,0 +1,58 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: add-contraints-t_applicants
+      author: gargantyua
+      changes:
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: applicant_id
+          tableName: t_applicants
+
+      - addPrimaryKey:
+          columnNames: applicant_id
+          constraintName: pk_applicant
+          tableName: t_applicants
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: surname
+          tableName: t_applicants
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: name
+          tableName: t_applicants
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: patronymic
+          tableName: t_applicants
+
+      - addNotNullConstraint:
+          columnDataType: int
+          columnName: qualification
+          tableName: t_applicants
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: activity
+          tableName: t_applicants
+
+
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: wanted_salary
+          tableName: t_applicants
+
+      - addNotNullConstraint:
+          columnDataType: boolean
+          columnName: deleted
+          tableName: t_applicants
+
+      - addAutoIncrement:
+          columnDataType: bigint
+          columnName: applicant_id
+          incrementBy: 1
+          startWith: 1
+          tableName: t_applicants

@@ -1,0 +1,42 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: add-contraints-t_deals
+      author: gargantyua
+      changes:
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: deal_id
+          tableName: t_deals
+
+      - addPrimaryKey:
+          columnNames: deal_id
+          constraintName: pk_deal
+          tableName: t_deals
+
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: employer_id
+          tableName: t_deals
+
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: applicant_id
+          tableName: t_deals
+
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: commission
+          tableName: t_deals
+
+      - addNotNullConstraint:
+          columnDataType: boolean
+          columnName: deleted
+          tableName: t_deals
+
+      - addAutoIncrement:
+          columnDataType: bigint
+          columnName: deal_id
+          incrementBy: 1
+          startWith: 1
+          tableName: t_deals

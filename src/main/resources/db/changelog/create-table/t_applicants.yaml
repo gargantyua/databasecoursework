@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+        id: create-applicants-table
+        author: gargantyua
+        changes:
+        - createTable:
+            columns:
+            - column:
+                name: applicant_id
+                remarks: Уникальный идентификатор записи
+                type: bigint
+            - column:
+                name: surname
+                remarks: Фамилия соискателя
+                type: varchar(255)
+            - column:
+                name: name
+                remarks: Имя соискателя
+                type: varchar(255)
+            - column:
+                name: patronymic
+                remarks: Отчество соискателя
+                type: varchar(255)
+            - column:
+                name: qualification
+                remarks: Квалификация соискателя в годах (опыт работы)
+                type: int
+            - column:
+                name: activity
+                remarks: Вид деятельности соискателя
+                type: varchar(255)
+            - column:
+                name: other_info
+                remarks: Иная информация о соискателе
+                type: varchar(1000)
+            - column:
+                name: wanted_salary
+                remarks: Желаемая ЗП соискателя
+                type: bigint
+            - column:
+                name: deleted
+                remarks: Флаг удаления соискателя
+                type: boolean
+            tableName: t_applicants

@@ -1,35 +1,35 @@
 package com.kuptsov.databasecoursework.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
-@Builder
 @Entity
-@Table(name = "t_deals")
-public class Deal {
+@Table(name = "t_vacancies")
+public class Vacancy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "deal_id")
+    @Column(name = "vacancy_id")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "applicant_id")
-    private Applicant applicant;
 
     @ManyToOne
     @JoinColumn(name = "employer_id")
     private Employer employer;
 
     @ManyToOne
-    @JoinColumn(name = "vacancy_id")
-    private Vacancy vacancy;
+    @JoinColumn(name = "applicant_id")
+    private Applicant applicant;
 
-    @Column(name = "commission")
-    private Long commission;
+    @Column(name = "qualification")
+    private Integer qualification;
+
+    @Column(name = "position")
+    private String position;
+
+    @Column(name = "offered_salary")
+    private Long offeredSalary;
 
     @Column(name = "deleted")
     private boolean deleted;

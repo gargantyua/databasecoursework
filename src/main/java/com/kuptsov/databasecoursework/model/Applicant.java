@@ -1,34 +1,40 @@
 package com.kuptsov.databasecoursework.model;
 
-import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
-@Builder
 @Entity
+@Table(name = "t_applicants")
 public class Applicant {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "applicant_id")
     private Long id;
 
+    @Column(name = "surname")
     private String surname;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "patronymic")
     private String patronymic;
 
+    @Column(name = "qualification")
     private Integer qualification;
 
+    @Column(name = "activity")
     private String activity;
 
+    @Column(name = "other_info")
     private String otherInfo;
 
-    private Long salary;
+    @Column(name = "wanted_salary")
+    private Long wantedSalary;
+
+    @Column(name = "deleted")
+    private boolean deleted;
 }

@@ -18,14 +18,15 @@
         </div>
         <div class="nav-content">
             <ul class="tabs tabs-transparent">
-                <li class="tab"><a class="active" href="#emploers">Работодатели</a></li>
+                <li class="tab"><a class="active" href="#employers">Работодатели</a></li>
                 <li class="tab"><a href="#applicants">Соискатели</a></li>
-                <li class="tab"><a href="#deals">Сделки</a></li>
+                <li class="tab"><a href="#vacancies">Открытые вакансии</a></li>
+                <li class="tab"><a href="#deals">История сделок</a></li>
             </ul>
         </div>
     </nav>
 
-    <div id="emploers" class="col s12">
+    <div id="employers" class="col s12">
         <div class="container">
             <table>
                 <thead>
@@ -38,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="e : ${emploers}">
+                    <tr th:each="e : ${employers}">
                         <td th:text="${e.id}"></td>
                         <td th:text="${e.title}"></td>
                         <td th:text="${e.activity}"></td>
@@ -47,6 +48,122 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating green modal-trigger" href="#employer_upload"><i class="material-icons">file_upload</i></a></li>
+                <li><a class="btn-floating yellow darken-1 modal-trigger" href="#employer_update"><i class="material-icons">update</i></a></li>
+                <li><a class="btn-floating red modal-trigger" href="#employer_remove"><i class="material-icons">delete_forever</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="employer_upload" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Добавить нового работодателя</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/employer/create}" th:object="${createEmployerDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="employer_title_create" type="text" required="required" th:field="*{title}">
+                            <label for="employer_title_create">Название компании</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="employer_activity_create" type="text" required="required" th:field="*{activity}">
+                            <label for="employer_activity_create">Вид деятельности</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="employer_address_create" type="text" required="required" th:field="*{address}">
+                            <label for="employer_address_create">Адрес</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="employer_telephone_create" type="text" required="required" th:field="*{telephone}">
+                            <label for="employer_telephone_create">Телефон</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Добавить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
+    <div id="employer_remove" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Удалить работодателя</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/employer/remove}" th:object="${deleteEmployerDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="employer_id_remove" type="number" required="required" th:field="*{id}">
+                            <label for="employer_id_remove">ID работодателя</label>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Удалить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
+    <div id="employer_update" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Обновить работодателя</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/employer/update}" th:object="${updateEmployerDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="employer_id_update" type="number" required="required" th:field="*{id}">
+                            <label for="employer_id_update">ID работодателя</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="employer_title_update" type="text" th:field="*{title}">
+                            <label for="employer_title_update">Название компании</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="employer_activity_update" type="text" th:field="*{activity}">
+                            <label for="employer_activity_update">Вид деятельности</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="emploer_address" type="text" th:field="*{address}">
+                            <label for="emploer_address">Адрес</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="emploer_telephone" type="text" th:field="*{telephone}">
+                            <label for="emploer_telephone">Телефон</label>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Обновить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
         </div>
     </div>
     <div id="applicants" class="col s12">
@@ -73,10 +190,164 @@
                     <td class="center" th:text="${a.qualification}"></td>
                     <td th:text="${a.activity}"></td>
                     <td th:text="${a.otherInfo}"></td>
-                    <td class="center" th:text="${a.salary}"></td>
+                    <td class="center" th:text="${a.wantedSalary}"></td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating green modal-trigger" href="#applicant_create"><i class="material-icons">file_upload</i></a></li>
+                <li><a class="btn-floating yellow darken-1 modal-trigger" href="#applicant_update"><i class="material-icons">update</i></a></li>
+                <li><a class="btn-floating red modal-trigger" href="#applicant_remove"><i class="material-icons">delete_forever</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="applicant_create" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Добавить нового соискателя</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/applicant/create}" th:object="${createApplicantDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input id="applicant_surname_create" type="text" required="required" th:field="*{surname}">
+                            <label for="applicant_surname_create">Фамилия</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="applicant_name_create" type="text" required="required" th:field="*{name}">
+                            <label for="applicant_name_create">Имя</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="applicant_patronymic_create" type="text" required="required" th:field="*{patronymic}">
+                            <label for="applicant_patronymic_create">Отчество</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="applicant_qualification_create" type="number" required="required" th:field="*{qualification}">
+                            <label for="applicant_qualification_create">Квалификация (лет)</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('qualification')}" th:errors="*{qualification}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_activity_create" type="text" required="required" th:field="*{activity}">
+                            <label for="applicant_activity_create">Вид деятельности</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_otherInfo_create" type="text" required="required" th:field="*{otherInfo}">
+                            <label for="applicant_otherInfo_create">Иная информация</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('otherInfo')}" th:errors="*{otherInfo}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_wantedSalary_create" type="number" required="required" th:field="*{wantedSalary}">
+                            <label for="applicant_wantedSalary_create">Желаемая ЗП</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('wantedSalary')}" th:errors="*{wantedSalary}"></span>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Добавить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
+    <div id="applicant_remove" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Удалить соискателя</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/applicant/remove}" th:object="${deleteApplicantDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="applicant_id_remove" type="number" required="required" th:field="*{id}">
+                            <label for="applicant_id_remove">ID соискателя</label>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Удалить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
+    <div id="applicant_update" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Обновить соискателя</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/applicant/update}" th:object="${updateApplicantDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="applicant_id_update" type="number" required="required" th:field="*{id}">
+                            <label for="applicant_id_update">ID соискателя</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <input id="applicant_surname_update" type="text" th:field="*{surname}">
+                            <label for="applicant_surname_update">Фамилия</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="applicant_name_update" type="text" th:field="*{name}">
+                            <label for="applicant_name_update">Имя</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="applicant_patronymic_update" type="text" th:field="*{patronymic}">
+                            <label for="applicant_patronymic_update">Отчество</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="applicant_qualification_update" type="number" th:field="*{qualification}">
+                            <label for="applicant_qualification_update">Квалификация (лет)</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('qualification')}" th:errors="*{qualification}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_activity_update" type="text" th:field="*{activity}">
+                            <label for="applicant_activity_update">Вид деятельности</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_otherInfo_update" type="text" th:field="*{otherInfo}">
+                            <label for="applicant_otherInfo_update">Иная информация</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('otherInfo')}" th:errors="*{otherInfo}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_wantedSalary_update" type="number" th:field="*{wantedSalary}">
+                            <label for="applicant_wantedSalary_update">Желаемая ЗП</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('wantedSalary')}" th:errors="*{wantedSalary}"></span>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Обновить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
         </div>
     </div>
     <div id="deals" class="col s12">
@@ -95,21 +366,163 @@
                 <tr th:each="d : ${deals}">
                     <td th:text="${d.id}"></td>
                     <td th:text="|${d.applicant.surname} ${d.applicant.name} ${d.applicant.patronymic}|"></td>
-                    <td th:text="${d.emploer.title}"></td>
-                    <td th:text="${d.position}"></td>
+                    <td th:text="${d.employer.title}"></td>
+                    <td th:text="${d.vacancy.position}"></td>
                     <td th:text="${d.commission}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
+    <div id="vacancies" class="col s12">
+        <div class="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Работодатель</th>
+                    <th>Должность</th>
+                    <th>Квалификация (лет)</th>
+                    <th>Зарплата</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="v : ${vacancies}">
+                    <td th:text="${v.id}"></td>
+                    <td th:text="${v.employer.title}"></td>
+                    <td th:text="${v.position}"></td>
+                    <td class="center" th:text="${v.qualification}"></td>
+                    <td class="center" th:text="${v.offeredSalary}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating green modal-trigger" href="#vacancy_create"><i class="material-icons">file_upload</i></a></li>
+                <li><a class="btn-floating yellow darken-1 modal-trigger" href="#vacancy_update"><i class="material-icons">update</i></a></li>
+                <li><a class="btn-floating red modal-trigger" href="#vacancy_remove"><i class="material-icons">delete_forever</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="vacancy_create" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Добавить новую вакансию</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/vacancy/create}" th:object="${createVacancyDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="vacancy_employerTitle_create" type="text" required="required" th:field="*{employerTitle}">
+                            <label for="vacancy_employerTitle_create">Название работодателя</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('employerTitle')}" th:errors="*{employerTitle}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="vacancy_qualification_create" type="number" required="required" th:field="*{qualification}">
+                            <label for="vacancy_qualification_create">Квалификация (лет)</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('qualification')}" th:errors="*{qualification}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_position_create" type="text" required="required" th:field="*{position}">
+                            <label for="applicant_position_create">Должность</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_offeredSalary_create" type="number" required="required" th:field="*{offeredSalary}">
+                            <label for="applicant_offeredSalary_create">Зарплата</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('offeredSalary')}" th:errors="*{offeredSalary}"></span>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Добавить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
+    <div id="vacancy_remove" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Удалить вакансию</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/vacancy/remove}" th:object="${deleteVacancyDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="vacancy_id_remove" type="number" required="required" th:field="*{id}">
+                            <label for="vacancy_id_remove">ID вакансии</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Удалить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
+    <div id="vacancy_update" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Обновить вакансию</h4>
+            <div class="row">
+                <form class="col s12" th:action="@{/vacancy/update}" th:object="${updateVacancyDTO}" method="post">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="vacancy_id_update" type="number" required="required" th:field="*{id}">
+                            <label for="vacancy_id_update">ID вакансии</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input id="vacancy_qualification_update" type="number" th:field="*{qualification}">
+                            <label for="vacancy_employerTitle_create">Квалификация (лет)</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('qualification')}" th:errors="*{qualification}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="vacancy_position_update" type="text" th:field="*{position}">
+                            <label for="vacancy_position_update">Должность</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="applicant_offeredSalary_update" type="number" th:field="*{offeredSalary}">
+                            <label for="applicant_offeredSalary_update">Зарплата</label>
+                            <span class="helper-text" th:if="${#fields.hasErrors('offeredSalary')}" th:errors="*{offeredSalary}"></span>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Обновить
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
 
     <script src="/webjars/jquery/2.1.1/dist/jquery.min.js"></script>
     <script src="/webjars/materializecss/1.0.0/js/materialize.min.js"></script>
     <script>
         $(document).ready(function(){
             $('.tabs').tabs();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
         });
     </script>
 </body>

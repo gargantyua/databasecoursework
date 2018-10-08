@@ -1,0 +1,23 @@
+databaseChangeLog:
+
+  # create tables
+  - include: { relativeToChangelogFile: true, file: create-table/t_employers.yaml }
+  - include: { relativeToChangelogFile: true, file: create-table/t_applicants.yaml }
+  - include: { relativeToChangelogFile: true, file: create-table/t_vacancies.yaml }
+  - include: { relativeToChangelogFile: true, file: create-table/t_deals.yaml }
+
+  # add index and constraints
+  - include: { relativeToChangelogFile: true, file: index-and-constraint/t_employers.yaml }
+  - include: { relativeToChangelogFile: true, file: index-and-constraint/t_applicants.yaml }
+  - include: { relativeToChangelogFile: true, file: index-and-constraint/t_vacancies.yaml }
+  - include: { relativeToChangelogFile: true, file: index-and-constraint/t_deals.yaml }
+
+  # add foreign keys
+  - include: { relativeToChangelogFile: true, file: foreign-key/t_vacancies.yaml }
+  - include: { relativeToChangelogFile: true, file: foreign-key/t_deals.yaml }
+
+  # init data
+  - include: { relativeToChangelogFile: true, file: init/t_employers.yaml }
+  - include: { relativeToChangelogFile: true, file: init/t_applicants.yaml }
+  - include: { relativeToChangelogFile: true, file: init/t_vacancies.yaml }
+  - include: { relativeToChangelogFile: true, file: init/t_deals.yaml }

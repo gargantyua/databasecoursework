@@ -1,0 +1,30 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: t_vacancies-init
+      author: gargantyua
+      changes:
+      - loadData:
+          columns:
+          - column:
+              name: employer_id
+              type: numeric
+          - column:
+              name: applicant_id
+              type: numeric
+          - column:
+              name: position
+              type: string
+          - column:
+              name: qualification
+              type: numeric
+          - column:
+              name: offered_salary
+              type: numeric
+          - column:
+              name: deleted
+              type: boolean
+          encoding: UTF-8
+          file: db/data/vacancies.CSV
+          separator: ";"
+          tableName: t_vacancies

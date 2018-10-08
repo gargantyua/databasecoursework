@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+        id: create-deals-table
+        author: gargantyua
+        changes:
+        - createTable:
+            columns:
+            - column:
+                name: deal_id
+                remarks: Уникальный идентификатор записи
+                type: bigint
+            - column:
+                name: employer_id
+                remarks: С каким работодателем совершена сделка
+                type: bigint
+            - column:
+                name: applicant_id
+                remarks: С каким соискателем совершена сделка
+                type: bigint
+            - column:
+                name: vacancy_id
+                remarks: В результате какой вакансии совершилась сделка
+                type: bigint
+            - column:
+                name: commission
+                remarks: Комиссионные бюро за сделку
+                type: bigint
+            - column:
+                name: deleted
+                remarks: Флаг удаления записи
+                type: boolean
+            tableName: t_deals

@@ -1,0 +1,47 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: add-contraints-t_vacancies
+      author: gargantyua
+      changes:
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: vacancy_id
+          tableName: t_vacancies
+
+      - addPrimaryKey:
+          columnNames: vacancy_id
+          constraintName: pk_vacancy
+          tableName: t_vacancies
+
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: employer_id
+          tableName: t_vacancies
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: position
+          tableName: t_vacancies
+
+      - addNotNullConstraint:
+          columnDataType: int
+          columnName: qualification
+          tableName: t_vacancies
+
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: offered_salary
+          tableName: t_vacancies
+
+      - addNotNullConstraint:
+          columnDataType: boolean
+          columnName: deleted
+          tableName: t_vacancies
+
+      - addAutoIncrement:
+          columnDataType: bigint
+          columnName: vacancy_id
+          incrementBy: 1
+          startWith: 1
+          tableName: t_vacancies

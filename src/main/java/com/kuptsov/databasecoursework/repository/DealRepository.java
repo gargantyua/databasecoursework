@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DealRepository extends CrudRepository<Deal, Long> {
+
+    Iterable<Deal> findAllByDeletedIsFalse();
 }

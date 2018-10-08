@@ -1,0 +1,9 @@
+employer_id;applicant_id;position;qualification;offered_salary;deleted
+1;NULL;Java-разработчик;3;75000;false
+2;NULL;Уборщик;10;5000;false
+3;NULL;Ретард;1;100000;false
+4;NULL;Лолямба;2;10000;false
+6;6;Промоутер;3;7800;false
+5;NULL;Валятель дурака;1;56700;false
+7;3;Таксист;3;45620;false
+8;NULL;Тестировщик;10;90000;false

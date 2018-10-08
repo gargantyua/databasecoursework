@@ -1,37 +1,61 @@
 package com.kuptsov.databasecoursework.controller;
 
+import com.kuptsov.databasecoursework.dto.create.CreateApplicantDTO;
+import com.kuptsov.databasecoursework.dto.create.CreateEmployerDTO;
+import com.kuptsov.databasecoursework.dto.create.CreateVacancyDTO;
+import com.kuptsov.databasecoursework.dto.delete.DeleteApplicantDTO;
+import com.kuptsov.databasecoursework.dto.delete.DeleteEmployerDTO;
+import com.kuptsov.databasecoursework.dto.delete.DeleteVacancyDTO;
+import com.kuptsov.databasecoursework.dto.update.UpdateApplicantDTO;
+import com.kuptsov.databasecoursework.dto.update.UpdateEmployerDTO;
+import com.kuptsov.databasecoursework.dto.update.UpdateVacancyDTO;
 import com.kuptsov.databasecoursework.service.ApplicantService;
 import com.kuptsov.databasecoursework.service.DealService;
-import com.kuptsov.databasecoursework.service.EmploerService;
+import com.kuptsov.databasecoursework.service.EmployerService;
+import com.kuptsov.databasecoursework.service.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
 
-    private final EmploerService emploerService;
-
+    private final DealService dealService;
+    private final VacancyService vacancyService;
+    private final EmployerService employerService;
     private final ApplicantService applicantService;
 
-    private final DealService dealService;
-
     @Autowired
-    public HomeController(EmploerService emploerService,
+    public HomeController(EmployerService employerService,
                           ApplicantService applicantService,
-                          DealService dealService) {
-        this.emploerService = emploerService;
+                          DealService dealService,
+                          VacancyService vacancyService) {
+        this.employerService = employerService;
         this.applicantService = applicantService;
         this.dealService = dealService;
+        this.vacancyService = vacancyService;
     }
 
     @GetMapping("/")
-    public ModelAndView getIndex() {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("emploers", emploerService.getAllEmploers());
-        modelAndView.addObject("applicants", applicantService.getAllApplicants());
-        modelAndView.addObject("deals", dealService.getAllDeals());
-        return modelAndView;
+    public String getIndex(Model model) {
+        model.addAttribute("employers", employerService.findAll());
+        model.addAttribute("applicants", applicantService.findAll());
+        model.addAttribute("deals", dealService.findAll());
+        model.addAttribute("vacancies", vacancyService.findAll());
+
+        model.addAttribute("createVacancyDTO", new CreateVacancyDTO());
+        model.addAttribute("updateVacancyDTO", new UpdateVacancyDTO());
+        model.addAttribute("deleteVacancyDTO", new DeleteVacancyDTO());
+
+        model.addAttribute("createApplicantDTO", new CreateApplicantDTO());
+        model.addAttribute("updateApplicantDTO", new UpdateApplicantDTO());
+        model.addAttribute("deleteApplicantDTO", new DeleteApplicantDTO());
+
+        model.addAttribute("createEmployerDTO", new CreateEmployerDTO());
+        model.addAttribute("updateEmployerDTO", new UpdateEmployerDTO());
+        model.addAttribute("deleteEmployerDTO", new DeleteEmployerDTO());
+
+        return "index";
     }
 }

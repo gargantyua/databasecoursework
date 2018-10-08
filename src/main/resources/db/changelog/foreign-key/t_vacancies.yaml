@@ -1,0 +1,27 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: create-vacancies-foreign-keys
+      author: gargantyua
+      changes:
+      - addForeignKeyConstraint:
+          baseColumnNames: employer_id
+          baseTableName: t_vacancies
+          constraintName: fk_vacancy_employer
+          deferrable: false
+          initiallyDeferred: false
+          onDelete: NO ACTION
+          onUpdate: NO ACTION
+          referencedColumnNames: employer_id
+          referencedTableName: t_employers
+
+      - addForeignKeyConstraint:
+          baseColumnNames: applicant_id
+          baseTableName: t_vacancies
+          constraintName: fk_vacancy_applicant
+          deferrable: false
+          initiallyDeferred: false
+          onDelete: NO ACTION
+          onUpdate: NO ACTION
+          referencedColumnNames: applicant_id
+          referencedTableName: t_applicants

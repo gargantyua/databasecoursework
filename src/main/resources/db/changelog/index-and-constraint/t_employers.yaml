@@ -1,0 +1,52 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: add-contraints-t_employers
+      author: gargantyua
+      changes:
+      - addNotNullConstraint:
+          columnDataType: bigint
+          columnName: employer_id
+          tableName: t_employers
+
+      - addPrimaryKey:
+          columnNames: employer_id
+          constraintName: pk_employer
+          tableName: t_employers
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: title
+          tableName: t_employers
+
+      - addUniqueConstraint:
+            columnNames: title
+            constraintName: employer_title_unique
+            tableName: t_employers
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: activity
+          tableName: t_employers
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: address
+          tableName: t_employers
+
+      - addNotNullConstraint:
+          columnDataType: varchar(255)
+          columnName: telephone
+          tableName: t_employers
+
+      - addNotNullConstraint:
+          columnDataType: boolean
+          columnName: deleted
+          tableName: t_employers
+
+      - addAutoIncrement:
+          columnDataType: bigint
+          columnName: employer_id
+          incrementBy: 1
+          startWith: 1
+          tableName: t_employers

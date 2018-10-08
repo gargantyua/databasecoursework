@@ -1,0 +1,27 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: t_deals-init
+      author: gargantyua
+      changes:
+      - loadData:
+          columns:
+          - column:
+              name: employer_id
+              type: numeric
+          - column:
+              name: applicant_id
+              type: numeric
+          - column:
+              name: vacancy_id
+              type: numeric
+          - column:
+              name: commission
+              type: numeric
+          - column:
+              name: deleted
+              type: boolean
+          encoding: UTF-8
+          file: db/data/deals.CSV
+          separator: ";"
+          tableName: t_deals

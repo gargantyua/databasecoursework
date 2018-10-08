@@ -1,0 +1,36 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: t_applicants-init
+      author: gargantyua
+      changes:
+      - loadData:
+          columns:
+          - column:
+              name: surname
+              type: string
+          - column:
+              name: name
+              type: string
+          - column:
+              name: patronymic
+              type: string
+          - column:
+              name: qualification
+              type: numeric
+          - column:
+              name: activity
+              type: string
+          - column:
+              name: other_info
+              type: string
+          - column:
+              name: wanted_salary
+              type: numeric
+          - column:
+              name: deleted
+              type: boolean
+          encoding: UTF-8
+          file: db/data/applicants.CSV
+          separator: ";"
+          tableName: t_applicants

@@ -1,0 +1,27 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: t_employers-init
+      author: gargantyua
+      changes:
+      - loadData:
+          columns:
+          - column:
+              name: title
+              type: string
+          - column:
+              name: activity
+              type: string
+          - column:
+              name: address
+              type: string
+          - column:
+              name: telephone
+              type: string
+          - column:
+              name: deleted
+              type: boolean
+          encoding: UTF-8
+          file: db/data/employers.CSV
+          separator: ";"
+          tableName: t_employers
